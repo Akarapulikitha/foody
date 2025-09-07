@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Ordering Website</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    
+    .auth-page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: url("https://images.unsplash.com/photo-1600891964599-f61ba0e24092") center/cover no-repeat;
+    }
+
+    .auth-box {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      width: 350px;
+      text-align: center;
+    }
+
+    .auth-box h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .auth-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .auth-box button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background: #ff5722;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .auth-box button:hover {
+      background: #e64a19;
+    }
+
+    .auth-box p {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .auth-box a {
+      color: #ff5722;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .page {
+      display: none;
+    }
+
+    #login,
+    #signup {
+    display: flex;              
+    justify-content: center;    
+    align-items: center;       
+    height: 100vh;             
+    }
+ 
+    #login:target,
+    #signup:target {
+    display: flex;
+    }
+
+    
+    #content:target {
+    display: block;
+    }
+
+
+    #signup:target ~ #login,
+    #signup:target ~ #content,
+    #login:target ~ #signup,
+    #content:target ~ #login,
+    #content:target ~ #signup {
+      display: none;
+    }
+
+    
+    header {
+      background: #ff5722;
+      color: white;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-size: 24px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+
+    .btn {
+        display: block;          
+        width: 90%;            
+        margin: 10px auto 15px;  
+        text-align: center;
+        padding: 12px;
+        background: #ff5722;
+        color: white;
+        font-size: 16px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background 0.3s;
+    }
+
+    .card .btn:hover {
+        background: #e64a19;
+    }
+
+
+    .Food {
+      background: url("https://images.unsplash.com/photo-1600891964599-f61ba0e24092") center/cover no-repeat;
+      height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+    }
+
+    .Food h2 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .Food p {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .menu {
+      padding: 50px 40px;
+      text-align: center;
+    }
+
+    .menu h2 {
+      font-size: 32px;
+      margin-bottom: 30px;
+    }
+
+    .menu-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card h3 {
+      margin: 15px 0 5px;
+      font-size: 20px;
+    }
+
+    .card p {
+      margin-bottom: 10px;
+    }
+
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  
+  <section class="auth-page" id="login">
+    <div class="auth-box">
+      <h2>Login</h2>
+      <form action="#content">
+        <input type="text" placeholder="Enter Username" required>
+        <input type="password" placeholder="Enter Password" required>
+        <button type="submit">Login</button>
+        <p>Don’t have an account? <a href="#signup">Sign Up</a></p>
+      </form>
+    </div>
+  </section>
+
+ 
+  <section class="auth-page" id="signup">
+    <div class="auth-box">
+      <h2>Sign Up</h2>
+      <form action="#content">
+        <input type="text" placeholder="Full Name" required>
+        <input type="email" placeholder="Email Address" required>
+        <input type="password" placeholder="Create Password" required>
+        <button type="submit">Sign Up</button>
+        <p>Already have an account? <a href="#login">Login</a></p>
+      </form>
+    </div>
+  </section>
+
+ 
+  <div class="page" id="content">
+    <header>
+      <h1>Foody</h1>
+      <nav>
+        <ul>
+          <li><a href="#Food">Home</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    
+    <section class="Food" id="Food">
+      <div>
+        <h2>Delicious Meals Delivered</h2>
+        <p>Order your favorite food anytime, anywhere</p>
+        <a href="#menu" class="btn">Order Now</a>
+      </div>
+    </section>
+
+    <section class="menu" id="menu">
+      <h2>Our Popular Dishes</h2>
+      <div class="menu-items">
+        <div class="card">
+          <img src="cheese pizza.avif" alt="Pizza">
+          <h3>Cheese Pizza</h3>
+          <p>₹99</p>
+          <a href="#" class="btn">Order</a>
+        </div>
+        <div class="card">
+          <img src="burger.jpg" alt="Burger">
+          <h3>Veggie Burger</h3>
+          <p>₹199</p>
+          <a href="#" class="btn">Order</a>
+        </div>
+        <div class="card">
+          <img src="pasta1.jpg" alt="Pasta">
+          <h3>Italian Pasta</h3>
+          <p>₹149</p>
+          <a href="#" class="btn">Order</a>
+        </div>
+        <div class="card">
+          <img src="salad.jpg" alt="Salad">
+          <h3>Fresh Salad</h3>
+          <p>₹149</p>
+          <a href="#" class="btn">Order</a>
+        </div>
+      </div>
+    </section>
+
+    
+    <footer id="contact">
+      <p>© 2024 Foody | All Rights Reserved</p>
+    </footer>
+  </div>
+    <!-- Simple JavaScript -->
+  <script>
+    // Handle login
+    document.getElementById("loginForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      let user = document.getElementById("loginUser").value;
+      alert("Welcome back, " + user + "! You are logged in.");
+      window.location.href = "#content";
+    });
+
+    // Handle signup
+    document.getElementById("signupForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      let name = document.getElementById("signupName").value;
+      alert("Account created successfully! Welcome, " + name + ".");
+      window.location.href = "#content";
+    });
+
+    // Handle order buttons
+    document.querySelectorAll(".orderBtn").forEach(function(btn){
+      btn.addEventListener("click", function(e){
+        e.preventDefault();
+        let item = this.parentElement.querySelector("h3").innerText;
+        alert(item + " has been added to your order!");
+      });
+    });
+  </script>
+</body>
+</html>
